@@ -1,0 +1,73 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A user of the application, either an admin or a customer.",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string", "enum": ["admin", "customer"], "description": "The user's role." },
+        "name": { "type": "string", "description": "The user's full name." },
+        "email": { "type": "string", "format": "email", "description": "The user's email address." },
+        "phone": { "type": "string", "description": "The user's phone number." },
+        "address": { "type": "string", "description": "The user's address." },
+        "status": { "type": "string", "enum": ["active", "blocked"], "description": "The user's account status." },
+        "created_at": { "type": "string", "format": "date-time", "description": "When the user was created." }
+      },
+      "required": ["role", "name", "email", "status"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "A product available in the store.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "The product's name." },
+        "price": { "type": "number", "description": "The product's price." },
+        "oldPrice": { "type": "number", "description": "The product's old price, if on sale." },
+        "category": { "type": "string", "description": "The product's category." },
+        "image": { "type": "string", "description": "The product's image URL." },
+        "tag": { "type": "string", "description": "A tag for the product, e.g., 'Most Selling'." },
+        "rating": { "type": "number", "description": "The product's rating." },
+        "stock": { "type": "number", "description": "The number of items in stock." },
+        "created_at": { "type": "string", "format": "date-time", "description": "When the product was added." }
+      },
+      "required": ["name", "price", "category", "image", "stock"]
+    },
+    "Setting": {
+      "title": "Setting",
+      "description": "A global application setting.",
+      "type": "object",
+      "properties": {
+        "value": { "type": "string", "description": "The value of the setting." }
+      },
+      "required": ["value"]
+    },
+    "Recommendation": {
+      "title": "Recommendation",
+      "description": "A product recommendation from a user.",
+      "type": "object",
+      "properties": {
+        "message": { "type": "string", "description": "The recommendation message." },
+        "created_at": { "type": "string", "format": "date-time", "description": "When the recommendation was submitted." }
+      },
+      "required": ["message"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Stores user profiles."
+    },
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Stores all products."
+    },
+    "/settings/{settingId}": {
+      "schema": { "$ref": "#/entities/Setting" },
+      "description": "Stores global settings like site_status."
+    },
+    "/recommendations/{recommendationId}": {
+      "schema": { "$ref": "#/entities/Recommendation" },
+      "description": "Stores user recommendations."
+    }
+  }
+}
