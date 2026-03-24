@@ -14,6 +14,7 @@ import SiteStatusWrapper from "./components/SiteStatusWrapper";
 import Recommendation from "./components/Recommendation";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function App() {
   return (
@@ -36,6 +37,7 @@ export default function App() {
             </div>
           </SiteStatusWrapper>
         </BrowserRouter>
+        <Analytics />
       </AuthProvider>
     </ErrorBoundary>
   );
